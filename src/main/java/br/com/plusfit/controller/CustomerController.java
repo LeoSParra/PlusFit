@@ -1,9 +1,13 @@
 package br.com.plusfit.controller;
 
 import br.com.plusfit.controller.request.AddressRequestDto;
+import br.com.plusfit.controller.request.ContactRequestDto;
 import br.com.plusfit.controller.request.CustomerRequestDto;
+import br.com.plusfit.controller.request.EnrollmentRequestDto;
 import br.com.plusfit.controller.response.AddressResponseDto;
+import br.com.plusfit.controller.response.ContactResponseDto;
 import br.com.plusfit.controller.response.CustomerResponseDto;
+import br.com.plusfit.controller.response.EnrollmentResponseDto;
 import br.com.plusfit.model.Customer;
 import br.com.plusfit.model.mappers.CustomerMapper;
 import br.com.plusfit.repository.CustomerRepository;
@@ -20,7 +24,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("customer")
 public class CustomerController {
-
 
     @Autowired
     private CustomerService customerService;
@@ -59,5 +62,15 @@ public class CustomerController {
     @PutMapping("/{customerId}/address/{addressId}")
     public AddressResponseDto updateAddress(@RequestBody final AddressRequestDto addressRequestDto, @PathVariable Long customerId, @PathVariable Long addressId) {
         return new AddressResponseDto(this.customerService.update(addressRequestDto, addressId));
+    }
+
+    @PutMapping("/{customerId}/enrollment/{enrollmentId}")
+    public EnrollmentResponseDto updateEnrollment(@RequestBody final EnrollmentRequestDto enrollmentRequestDto, @PathVariable Long customerId, @PathVariable Long enrollmentId) {
+        return new EnrollmentResponseDto(this.customerService.update(enrollmentRequestDto, enrollmentId));
+    }
+
+    @PutMapping("/{customerId}/contact/{contactId}")
+    public ContactResponseDto updateContact(@RequestBody final ContactRequestDto contactRequestDto, @PathVariable Long customerId, @PathVariable Long contactId) {
+        return new ContactResponseDto(this.customerService.update(contactRequestDto, contactId));
     }
 }
