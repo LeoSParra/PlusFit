@@ -23,6 +23,7 @@ public class CustomerResponseDto {
     private String name;
     private String cpf;
     private LocalDate birthDate;
+    private Boolean active;
     private List<AddressResponseDto> addresses;
     private List<ContactResponseDto> contact;
     private List<EnrollmentResponseDto> enrollment;
@@ -33,6 +34,7 @@ public class CustomerResponseDto {
         this.name = customer.getName();
         this.cpf = customer.getCpf();
         this.birthDate = customer.getBirthDate();
+        this.active = customer.getActive();
         this.addresses = new ArrayList<>();
         this.contact = new ArrayList<>();
         this.enrollment = new ArrayList<>();
