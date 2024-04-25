@@ -1,6 +1,8 @@
 package br.com.plusfit.controller;
 
+import br.com.plusfit.controller.request.AddressRequestDto;
 import br.com.plusfit.controller.request.CustomerRequestDto;
+import br.com.plusfit.controller.response.AddressResponseDto;
 import br.com.plusfit.controller.response.CustomerResponseDto;
 import br.com.plusfit.model.Customer;
 import br.com.plusfit.model.mappers.CustomerMapper;
@@ -49,8 +51,13 @@ public class CustomerController {
         customerService.inactive(customerId);
     }
 
-    @PatchMapping("/{customerId}")
+    @PutMapping("/{customerId}")
     public CustomerResponseDto updateCustomer(@RequestBody final CustomerRequestDto customerRequestDto, @PathVariable Long customerId) {
         return new CustomerResponseDto(this.customerService.update(customerRequestDto, customerId));
+    }
+
+    @PutMapping("/{customerId}/address/{addressId}")
+    public AddressResponseDto updateAddress(@RequestBody final AddressRequestDto addressRequestDto, @PathVariable Long customerId, @PathVariable Long addressId) {
+        return new AddressResponseDto(this.customerService.update(addressRequestDto, addressId));
     }
 }

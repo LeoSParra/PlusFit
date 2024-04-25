@@ -1,12 +1,17 @@
 package br.com.plusfit.service;
 
+import br.com.plusfit.controller.request.AddressRequestDto;
 import br.com.plusfit.controller.request.CustomerRequestDto;
+import br.com.plusfit.model.Address;
 import br.com.plusfit.model.Customer;
+import br.com.plusfit.model.mappers.AddressMapper;
 import br.com.plusfit.model.mappers.CustomerMapper;
+import br.com.plusfit.repository.AddressRepository;
 import br.com.plusfit.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +22,14 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // @Autowired
-    //private CustomerMapper customerMapper;
+    @Autowired
+    private AddressRepository addressRepository;
+
+     @Autowired
+    private CustomerMapper customerMapper;
+
+     @Autowired
+     private AddressMapper addressMapper;
 
     public Customer save(final Customer customer) {
         return this.customerRepository.save(customer);
@@ -27,13 +38,25 @@ public class CustomerService {
     public Customer update(final CustomerRequestDto customerFromRequest, Long customerId) {
         Customer customerFromDatabase = customerRepository.findByCustomerId(customerId);
 
-        customerFromDatabase.setCpf(customerFromRequest.getCpf());
-        customerFromDatabase.setName(customerFromRequest.getName());
-        customerFromDatabase.setBirthDate(customerFromRequest.getBirthDate());
+        Customer updatedCustomer = this.customerMapper.toEntity(customerFromRequest);
 
+        updatedCustomer.setCustomerId(customerFromDatabase.getCustomerId());
+        updatedCustomer.setCustomerCode(customerFromDatabase.getCustomerCode());
+        updatedCustomer.setUpdateDate(LocalDateTime.now());
+//        updatedCustomer.set
+        // Passando as informacoes novas do fromrequest para o customerfromdatabase (informacoes velhas)
+        return this.customerRepository.save(updatedCustomer);
+    }
 
-        // this.customerMapper.updateCustomerFromDto(customerFromRequest, customerFromDatabase);        // Passando as informacoes novas do fromrequest para o customerfromdatabase (informacoes velhas)
-        return this.customerRepository.save(customerFromDatabase);
+    public Address update(final AddressRequestDto addressRequestDto, Long addressId) {
+        Address address = addressRepository.findByAddressId(addressId);
+
+        address.setAddressNumber(addressRequestDto.getAddressNumber());
+        address.setCity(addressRequestDto.getCity());
+
+//        updatedCustomer.set
+        // Passando as informacoes novas do fromrequest para o customerfromdatabase (informacoes velhas)
+        return this.addressRepository.save(address);
     }
 
     public List<Customer> findAll() {

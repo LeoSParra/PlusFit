@@ -26,7 +26,7 @@ public class Customer {
     @SequenceGenerator(name = "CUSTOMER_SEQUENCE", sequenceName = "CUSTOMER_SEQUENCE", allocationSize = 1)
     private Long customerId;
 
-    @Column(name="cod_customer")
+    @Column(name="cod_customer", updatable = false)
     private String customerCode;
 
     @Column(name="des_name")
