@@ -43,7 +43,6 @@ public class CustomerService {
     }
 
     public List<Customer> findAll() {
-
         return this.customerRepository.findAll();
     }
 
@@ -55,9 +54,15 @@ public class CustomerService {
     public Customer update(final CustomerRequestDto customerRequestDto, Long customerId) {
         Customer customer = customerRepository.findByCustomerId(customerId);
 
-        customer.setCpf(customerRequestDto.getCpf());
-        customer.setName(customerRequestDto.getName());
-        customer.setBirthDate(customerRequestDto.getBirthDate());
+        if (customerRequestDto.getCpf() != null) {
+            customer.setCpf(customerRequestDto.getCpf());
+        }
+        if (customerRequestDto.getName() != null) {
+            customer.setName(customerRequestDto.getName());
+        }
+        if (customerRequestDto.getBirthDate() != null) {
+            customer.setBirthDate(customerRequestDto.getBirthDate());
+        }
         customer.setUpdateDate(LocalDateTime.now());
 
         return this.customerRepository.save(customer);
