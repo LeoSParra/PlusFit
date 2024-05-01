@@ -5,7 +5,6 @@ create table training_sheet (
     num_version numeric(10,0) DEFAULT 0 not null,
     dat_creation timestamp not null,
     dat_update timestamp not null,
-    flg_active boolean not null,
     primary key (idt_training_sheet),
     constraint fk_customer_training_sheet
         foreign key (idt_customer)
@@ -21,7 +20,6 @@ create table activity (
     num_version numeric(10,0) DEFAULT 0 not null,
     dat_creation timestamp not null,
     dat_update timestamp not null,
-    flg_active boolean not null,
     primary key(idt_activity),
     constraint fk_training_sheet
         foreign key(idt_training_sheet)

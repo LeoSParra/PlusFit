@@ -16,4 +16,6 @@ public interface TrainingSheetRepository extends JpaRepository<TrainingSheet, Lo
     TrainingSheet save(TrainingSheet trainingSheet);
 
     TrainingSheet findByTrainingSheetId(Long trainingSheetId);
+
+    void delete(TrainingSheet trainingSheet);
 }

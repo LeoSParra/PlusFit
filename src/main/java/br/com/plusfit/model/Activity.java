@@ -44,9 +44,6 @@ public class Activity {
     @Column(name="dat_update")
     private LocalDateTime updateDate;
 
-    @Column(name="flg_active")
-    private Boolean active;
-
     public Activity (final ActivityRequestDto activityRequestDto, TrainingSheet trainingSheet) {
         this.trainingSheet = trainingSheet;
         this.description = activityRequestDto.getDescription();
@@ -54,6 +51,5 @@ public class Activity {
         this.bodyPart = BodyPart.getByString(activityRequestDto.getBodyPart());
         this.creationDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
-        this.active = true;
     }
 }

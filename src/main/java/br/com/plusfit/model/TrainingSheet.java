@@ -39,9 +39,6 @@ public class TrainingSheet {
     @Column(name="dat_update")
     private LocalDateTime updateDate;
 
-    @Column(name="flg_active")
-    private Boolean active;
-
     @OneToMany(mappedBy = "trainingSheet",
     cascade = CascadeType.ALL)
     private List<Activity> activity;
@@ -51,7 +48,6 @@ public class TrainingSheet {
         this.name = trainingSheetRequestDto.getName();
         this.creationDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
-        this.active = true;
 
         this.activity = new ArrayList<>();
         for (final ActivityRequestDto activityRequestDto: trainingSheetRequestDto.getActivity()) {

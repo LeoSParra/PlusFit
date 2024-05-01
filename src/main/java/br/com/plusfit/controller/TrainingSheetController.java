@@ -1,8 +1,6 @@
 package br.com.plusfit.controller;
 
-import br.com.plusfit.controller.request.CustomerRequestDto;
 import br.com.plusfit.controller.request.TrainingSheetRequestDto;
-import br.com.plusfit.controller.response.CustomerResponseDto;
 import br.com.plusfit.controller.response.TrainingSheetResponseDto;
 import br.com.plusfit.model.TrainingSheet;
 import br.com.plusfit.service.TrainingSheetService;
@@ -46,7 +44,7 @@ public class TrainingSheetController {
     }
 
     @DeleteMapping("/{trainingSheetId}")
-    public void inactiveTrainingSheet(@PathVariable final Long trainingSheetId) {
-        trainingSheetService.inactive(trainingSheetId);
+    public void deleteTrainingSheet(@PathVariable final Long trainingSheetId) {
+        trainingSheetService.delete(trainingSheetId);
     }
 }

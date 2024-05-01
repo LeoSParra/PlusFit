@@ -1,9 +1,13 @@
 package br.com.plusfit.service;
 
 import br.com.plusfit.controller.TrainingSheetController;
+import br.com.plusfit.controller.request.ActivityRequestDto;
 import br.com.plusfit.controller.request.TrainingSheetRequestDto;
+import br.com.plusfit.model.Activity;
 import br.com.plusfit.model.Customer;
 import br.com.plusfit.model.TrainingSheet;
+import br.com.plusfit.model.enums.BodyPart;
+import br.com.plusfit.repository.ActivityRepository;
 import br.com.plusfit.repository.CustomerRepository;
 import br.com.plusfit.repository.TrainingSheetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,9 @@ public class TrainingSheetService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private ActivityRepository activityRepository;
 
     public TrainingSheet save(final TrainingSheetRequestDto trainingSheetRequestDto, Long customerId) {
         Customer customer = customerRepository.getById(customerId);
@@ -49,9 +56,26 @@ public class TrainingSheetService {
         return this.trainingSheetRepository.save(trainingSheet);
     }
 
-    public void inactive(final Long trainingSheetId) {
+    public Activity update (final ActivityRequestDto activityRequestDto, Long activityId) {
+        Activity activity = activityRepository.findByActivityId(activityId);
+
+        if(activityRequestDto.getDescription() != null) {
+            activity.setDescription(activityRequestDto.getDescription());
+        }
+
+        if(activityRequestDto.getBodyPart() != null) {
+            activity.setBodyPart(BodyPart.getByString(activityRequestDto.getBodyPart()));
+        }
+
+        if(activityRequestDto.getGroup() != null) {
+            activity.setGroup((activityRequestDto.getGroup()));
+        }
+
+        return this.activityRepository.save(activity);
+    }
+
+    public void delete(final Long trainingSheetId) {
         TrainingSheet trainingSheet = trainingSheetRepository.findByTrainingSheetId(trainingSheetId);
-        trainingSheet.setActive(false);
-        this.trainingSheetRepository.save(trainingSheet);
+        this.trainingSheetRepository.delete(trainingSheet);
     }
 }
