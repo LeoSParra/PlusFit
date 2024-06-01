@@ -4,6 +4,7 @@ create table customer (
     des_name varchar(50) not null,
     des_cpf varchar(11) not null,
     dat_birth date not null,
+    gender varchar(1) not null,
     num_version numeric(10,0) DEFAULT 0 not null,      -- manter a versao correta, evitar versoes falhas
     dat_creation timestamp not null,                        -- data de criacao do registro
     dat_update timestamp not null,                         -- data do ultimo update

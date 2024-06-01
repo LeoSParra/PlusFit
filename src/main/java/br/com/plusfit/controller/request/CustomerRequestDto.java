@@ -20,6 +20,7 @@ public class CustomerRequestDto {
     private String name;
     private String cpf;
     private LocalDate birthDate;
+    private String gender;
     private List<AddressRequestDto> addresses;
     private List<ContactRequestDto> contact;
     private List<EnrollmentRequestDto> enrollment;
@@ -29,6 +30,7 @@ public class CustomerRequestDto {
         this.name = customer.getName();
         this.cpf = customer.getCpf();
         this.birthDate = customer.getBirthDate();
+        this.gender = customer.getGender().description;
         this.addresses = new ArrayList<>();
         this.contact = new ArrayList<>();
         this.enrollment = new ArrayList<>();

@@ -4,6 +4,7 @@ import br.com.plusfit.controller.request.AddressRequestDto;
 import br.com.plusfit.controller.request.ContactRequestDto;
 import br.com.plusfit.controller.request.CustomerRequestDto;
 import br.com.plusfit.controller.request.EnrollmentRequestDto;
+import br.com.plusfit.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,10 @@ public class Customer {
     @Column(name="dat_birth")
     private LocalDate birthDate;
 
+    @Column(name="gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     @Version
     @Column(name="num_version")
     private Integer version;
@@ -69,6 +74,7 @@ public class Customer {
         this.name = customerRequestDto.getName();
         this.cpf = customerRequestDto.getCpf();
         this.birthDate = customerRequestDto.getBirthDate();
+        this.gender = Gender.getByString(customerRequestDto.getGender());
         this.creationDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
         this.active = true;

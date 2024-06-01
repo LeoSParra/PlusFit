@@ -2,6 +2,7 @@ package br.com.plusfit.repository;
 
 import br.com.plusfit.model.Admin;
 import br.com.plusfit.model.Customer;
+import br.com.plusfit.model.TrainingSheet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     Admin save(Admin admin);
 
     Admin findByAdminId(Long adminId);
+
+    void delete(Admin admin);
 }

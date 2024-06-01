@@ -6,7 +6,6 @@ create table admin (
     num_version numeric(10,0) DEFAULT 0 not null,
     dat_creation timestamp not null,
     dat_update timestamp not null,
-    flg_active boolean not null,
     primary key (idt_admin),
     unique (des_email)
 );

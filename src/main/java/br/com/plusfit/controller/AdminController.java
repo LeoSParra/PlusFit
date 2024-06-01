@@ -4,7 +4,10 @@ import br.com.plusfit.controller.request.AdminRequestDto;
 import br.com.plusfit.controller.response.AdminResponseDto;
 import br.com.plusfit.model.Admin;
 import br.com.plusfit.service.AdminService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class AdminController {
 
     @DeleteMapping("/{adminId}")
     public void inactiveAdmin(@PathVariable final Long adminId) {
-        adminService.inactive(adminId);
+        adminService.delete(adminId);
     }
 
     @PatchMapping("/{adminId}")

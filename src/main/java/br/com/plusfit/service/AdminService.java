@@ -1,9 +1,7 @@
 package br.com.plusfit.service;
 
 import br.com.plusfit.controller.request.AdminRequestDto;
-import br.com.plusfit.controller.request.CustomerRequestDto;
 import br.com.plusfit.model.Admin;
-import br.com.plusfit.model.Customer;
 import br.com.plusfit.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +40,8 @@ public class AdminService {
         return adminOptional.orElse(null);
     }
 
-    public void inactive(final Long adminId) {
+    public void delete(final Long adminId) {
         Admin admin = adminRepository.findByAdminId(adminId);
-        admin.setActive(false);
-        this.adminRepository.save(admin);
+        this.adminRepository.delete(admin);
     }
 }

@@ -8,6 +8,7 @@ import br.com.plusfit.model.Address;
 import br.com.plusfit.model.Contact;
 import br.com.plusfit.model.Customer;
 import br.com.plusfit.model.Enrollment;
+import br.com.plusfit.model.enums.EnrollmentStatus;
 import br.com.plusfit.model.mappers.AddressMapper;
 import br.com.plusfit.model.mappers.CustomerMapper;
 import br.com.plusfit.repository.AddressRepository;
@@ -71,13 +72,26 @@ public class CustomerService {
     public Address update(final AddressRequestDto addressRequestDto, Long addressId) {
         Address address = addressRepository.findByAddressId(addressId);
 
-        address.setAddressNumber(addressRequestDto.getAddressNumber());
-        address.setCity(addressRequestDto.getCity());
-        address.setState(addressRequestDto.getState());
-        address.setZipCode(addressRequestDto.getZipCode());
+        if (addressRequestDto.getAddressNumber() != null) {
+            address.setAddressNumber(addressRequestDto.getAddressNumber());
+        }
+        if (addressRequestDto.getCity() != null) {
+            address.setCity(addressRequestDto.getCity());
+        }
+        if (addressRequestDto.getState() != null) {
+            address.setState(addressRequestDto.getState());
+        }
+        if (addressRequestDto.getZipCode() != null) {
+            address.setZipCode(addressRequestDto.getZipCode());
+        }
+        if (addressRequestDto.getNeighbourhood() != null) {
+            address.setNeighbourhood(addressRequestDto.getNeighbourhood());
+        }
+        if (addressRequestDto.getStreet() != null) {
+            address.setStreet(addressRequestDto.getStreet());
+        }
+
         address.setUpdateDate(LocalDateTime.now());
-        address.setNeighbourhood(addressRequestDto.getNeighbourhood());
-        address.setStreet(addressRequestDto.getStreet());
 
         return this.addressRepository.save(address);
     }
@@ -85,7 +99,13 @@ public class CustomerService {
     public Enrollment update(final EnrollmentRequestDto enrollmentRequestDto, Long enrollmentId) {
         Enrollment enrollment = enrollmentRepository.findByEnrollmentId(enrollmentId);
 
-        enrollment.setPlanDescription(enrollmentRequestDto.getPlanDescription());
+        if (enrollmentRequestDto.getPlanDescription() != null) {
+            enrollment.setPlanDescription(enrollmentRequestDto.getPlanDescription());
+        }
+        if (enrollmentRequestDto.getStatus() != null){
+            enrollment.setStatus(EnrollmentStatus.getByString(enrollmentRequestDto.getStatus()));
+        }
+
         enrollment.setUpdateDate(LocalDateTime.now());
 
         return this.enrollmentRepository.save(enrollment);
@@ -94,8 +114,13 @@ public class CustomerService {
     public Contact update(final ContactRequestDto contactRequestDto, Long contactId) {
         Contact contact = contactRepository.findByContactId(contactId);
 
-        contact.setEmail(contactRequestDto.getEmail());
-        contact.setPhoneNumber(contactRequestDto.getPhoneNumber());
+        if (contactRequestDto.getEmail() != null) {
+            contact.setEmail(contactRequestDto.getEmail());
+        }
+        if (contactRequestDto.getPhoneNumber() != null) {
+            contact.setPhoneNumber(contactRequestDto.getPhoneNumber());
+        }
+
         contact.setUpdateDate(LocalDateTime.now());
 
         return this.contactRepository.save(contact);

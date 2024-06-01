@@ -39,9 +39,6 @@ public class Admin {
     @Column(name="dat_update")
     private LocalDateTime updateDate;
 
-    @Column(name="flg_active")
-    private Boolean active;
-
     public Admin (final AdminRequestDto adminRequestDto) {
         this.adminId = adminRequestDto.getAdminId();
         this.userName = adminRequestDto.getUserName();
@@ -49,6 +46,5 @@ public class Admin {
         this.passWord = adminRequestDto.getPassWord();
         this.creationDate = LocalDateTime.now();
         this.updateDate = LocalDateTime.now();
-        this.active = true;
     }
 }

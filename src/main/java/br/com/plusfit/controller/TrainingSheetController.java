@@ -1,5 +1,6 @@
 package br.com.plusfit.controller;
 
+import br.com.plusfit.controller.request.ActivityRequestDto;
 import br.com.plusfit.controller.request.TrainingSheetRequestDto;
 import br.com.plusfit.controller.response.TrainingSheetResponseDto;
 import br.com.plusfit.model.TrainingSheet;
